@@ -1,0 +1,21 @@
+handler([{
+	"id":1001,
+	"name":"terry",
+	"age":22,
+	"gender":"男"
+},{
+	"id":1002,
+	"name":"larry",
+	"age":22,
+	"gender":"男"
+},{
+	"id":1003,
+	"name":"tom",
+	"age":19,
+	"gender":"男"
+},{
+	"id":1004,
+	"name":"jacky",
+	"age":20,
+	"gender":"男"
+}]);

@@ -1,0 +1,80 @@
+<style type="text/css">
+	#clazzTbl th{ background-color:#99F; height:24px;}
+	.hiddenTr{display:none;}
+</style>
+<script type="text/javascript">
+$(function(){
+	var url = "http://127.0.0.1:80/web1601/sms/model/clazz/clazzes.json";
+	$.ajax(url,{
+		dataType:"jsonp",
+		jsonp:"jsonp",
+		jsonpCallback:"loadData"
+		});
+	$(".opt_btns :checkbox").off("change");
+		$(".opt_btns :checkbox").change(function(){
+			if($(this).prop("checked")){
+				$("#clazzTbl td :checkbox").prop("checked","checked");
+				}else{
+					$("#clazzTbl td :checkbox").prop("checked","");
+					}
+			});
+});
+//jsonp的回调函数，用于处理获取的jsonp
+function loadData(data){
+	$("#clazzTbl tbody tr").remove(":not(:first)");
+	data.forEach(function(item){
+		//克隆行
+		var newTr = $(".hiddenTr").clone().removeClass("hiddenTr");
+		//console.log(newTr);
+		//将内容填充到行中 val有参赋值 无参赋值
+		newTr.find(":checkbox").val(item.id);		
+		//td 没有val 只有html text
+		newTr.children().eq(1).text(item.className);
+		newTr.children().eq(2).text(item.classNum);
+		newTr.children().eq(3).text(item.master);
+		newTr.children().eq(4).text(item.monitor);
+		//将处理的行追加到tbody上
+		$("#clazzTbl tbody").append(newTr);
+		});
+	}
+</script>
+<!--班级管理-->
+<div class="inner">
+    <div class="selects">
+        <select name="" id="">
+            <option value="name">姓名</option>
+            <option value="clazz">班级</option>
+            <option value="grade">成绩</option>
+        </select>
+        <input type="text">
+        <input type="submit" value="search">
+    </div>
+    <table id="clazzTbl">
+        <thead>
+            <tr>
+                <th>选择</th>
+                <th>班级名称</th>
+                <th>班级人数</th>
+                <th>班主任</th>
+                <th>班长</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="hiddenTr">
+                <td>
+    <input type="checkbox">
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="opt_btns">
+        <input type="checkbox">
+        <button>添加</button>
+        <button>修改</button>
+        <button>删除</button>
+    </div>
+</div>

@@ -1,0 +1,121 @@
+<style type="text/css">
+#stuTbl th{ background-color:#99F; height:24px;}
+.hiddenTr{display:none;}
+</style>
+<!---可以写在外面link进来-->
+<script type="text/javascript">
+$(function(){
+		//加载学生信息
+		loadStudentData();
+		//为全选绑定事件 on是底层的 change
+		$(".opt_btns :checkbox").off("change");
+		$(".opt_btns :checkbox").change(function(){
+			//console.log($(this).prop("checked"));
+		if($(this).prop("checked")){
+			$("#stuTbl td :checkbox").prop("checked","checked");
+			}else{
+			$("#stuTbl td :checkbox").prop("checked","");	
+			//""--可以替换成 false 
+			// 没用 $("#stuTbl td :checkbox").removeProp("checked");
+			// 有用 $("#stuTbl td :checkbox").removeAttr("checked")
+				}	
+	});
+	
+	//为按钮绑定事件
+	$(".opt_btns button").off("click");
+	$(".opt_btns button").click(function(){		
+		//获取opt按钮中的文字
+		var opt = $(this).text();
+		switch(opt){
+			case "添加":
+				$(this).parents(".tab_content").load("model/student/addStudent.html");
+			break;
+			case "修改":
+			
+			break;
+			case "删除":
+			
+			break;
+			case "刷新":
+				loadStudentData();
+			break;
+			}
+	});
+});
+
+//jsonp的回调函数，用于处理获取的jsonp
+function loadStudentData(){
+	//跨域
+	var url = "http://127.0.0.1:80/web1601/sms/model/student/students.json";
+	$.ajax(url,{
+		dataType:"jsonp",
+		jsonp:"jsonp",
+		jsonpCallback:"loadData"
+	});
+	//console.log(data);
+}
+
+function loadData(data){
+		//清空tbody中的原有信息 empty detach remove
+	//$("#stuTbl tbody").detach("tr :not('first')");
+	$("#stuTbl tbody tr").remove(":not(:first)");
+	data.forEach(function(item){
+		//克隆行
+		var newTr = $(".hiddenTr").clone().removeClass("hiddenTr");
+//$(".hiddenTr").clone().removeClass("hiddenTr").appendTo($("#stuTbl tbody"));
+		//console.log(newTr);
+		//将内容填充到行中 val有参赋值 无参赋值
+		newTr.find(":checkbox").val(item.id);		
+		//td 没有val 只有html text
+		newTr.children().eq(1).text(item.name);
+		newTr.children().eq(2).text(item.className);
+		newTr.children().eq(3).text(item.gender);
+		newTr.children().eq(4).text(item.grade);
+		//将处理的行追加到tbody上
+		$("#stuTbl tbody").append(newTr);
+		});
+}
+</script>
+
+<!--学生管理-->
+			<div class="inner">
+				<div class="selects">
+					<select name="" id="">
+						<option value="name">姓名</option>
+						<option value="clazz">班级</option>
+						<option value="grade">成绩</option>
+					</select>
+					<input type="text">
+					<input type="submit" value="search">
+				</div>
+                <!--给一个ID唯一标识 防止后期页面table太多样式重叠--> 
+				<table id="stuTbl">
+					<thead>
+						<tr>
+							<th>选择</th>
+							<th>姓名</th>
+							<th>班级</th>
+							<th>性别</th>
+							<th>分数</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="hiddenTr">
+							<td>
+				<input type="checkbox">
+							</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="opt_btns">
+					<input type="checkbox">
+					<button>添加</button>
+					<button>修改</button>
+					<button>删除</button>
+                    <button>刷新</button>
+				</div>
+			</div>

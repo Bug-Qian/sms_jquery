@@ -1,0 +1,25 @@
+loadData([{
+	"teacher_id":2001,
+	"teacher_name":"李春雨",
+	"work_age":"5",
+	"salary":"5000",
+	"level":"优秀"
+},{
+	"teacher_id":2002,
+	"teacher_name":"邬凯宁",
+	"work_age":"4",
+	"salary":"1000",
+	"level":"普通"
+},{
+	"teacher_id":2003,
+	"teacher_name":"毛忠斌",
+	"work_age":"2",
+	"salary":"3000",
+	"level":"特级"
+},{
+	"teacher_id":2004,
+	"teacher_name":"詹勇",
+	"work_age":"1",
+	"salary":"2000",
+	"level":"高级"
+}]);

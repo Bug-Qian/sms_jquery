@@ -1,0 +1,25 @@
+loadData([{
+	"id":3001,
+	"className":"web1601",
+	"classNum":"30",
+	"master":"钱佳勇",
+	"monitor":"钱佳勇"
+},{
+	"id":3002,
+	"className":"web1602",
+	"classNum":"35",
+	"master":"王立强",
+	"monitor":"王立强"
+},{
+	"id":3003,
+	"className":"web1603",
+	"classNum":"40",
+	"master":"毛忠斌",
+	"monitor":"毛忠斌"
+},{
+	"id":3004,
+	"className":"web1604",
+	"classNum":"50",
+	"master":"詹勇",
+	"monitor":"詹勇"
+}]);
